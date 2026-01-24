@@ -1,0 +1,24 @@
+name: Dummy CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      JOB_NAME:
+        description: 'Name of the job'
+        required: true
+        default: 'test-job'
+      BUILD_NUMBER:
+        description: 'Build number for this run'
+        required: true
+        default: '1'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show trigger details
+        run: |
+          echo "✅ Workflow triggered by: ${{ github.actor }}"
+          echo "🧱 Job name: ${{ github.event.inputs.JOB_NAME }}"
+          echo "🏗️ Build number: ${{ github.event.inputs.BUILD_NUMBER }}"
+          echo "Branch: ${{ github.ref }}"
